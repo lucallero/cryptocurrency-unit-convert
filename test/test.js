@@ -15,7 +15,7 @@ describe('Units', () => {
       assert.equal(Units.convertBTC('1', 'mbtc', 'ubtc'), '1000');
       assert.equal(Units.convertBTC('1', 'mbtc', 'satoshi'), '100000');
     });
-    it('should convert ubtc to other units', function() {
+    it('should convert ubtc to other units', function () {
       assert.equal(Units.convertBTC('1', 'ubtc', 'btc'), '0.000001');
       assert.equal(Units.convertBTC('1', 'ubtc', 'mbtc'), '0.001');
       assert.equal(Units.convertBTC('1', 'ubtc', 'satoshi'), '100');
@@ -70,7 +70,7 @@ describe('Units', () => {
       assert.equal(Units.convertBCH('1', 'mbch', 'ubch'), '1000');
       assert.equal(Units.convertBCH('1', 'mbch', 'satoshi'), '100000');
     });
-    it('should convert ubch to other units', function() {
+    it('should convert ubch to other units', function () {
       assert.equal(Units.convertBCH('1', 'ubch', 'bch'), '0.000001');
       assert.equal(Units.convertBCH('1', 'ubch', 'mbch'), '0.001');
       assert.equal(Units.convertBCH('1', 'ubch', 'satoshi'), '100');
@@ -120,14 +120,14 @@ describe('Units', () => {
       assert.equal(Units.convertETH('20.05', 'gwei', 'wei'), '20050000000');
       assert.equal(Units.convertETH('20.005', 'kwei', 'wei'), '20005');
     });
-    it('should convert wei to bigger unit', function() {
+    it('should convert wei to bigger unit', function () {
       assert.equal(Units.convertETH('1', 'wei', 'eth'), '0.000000000000000001');
       assert.equal(Units.convertETH('1', 'wei', 'finney'), '0.000000000000001');
       assert.equal(Units.convertETH('1', 'wei', 'gwei'), '0.000000001');
       assert.equal(Units.convertETH('1', 'wei', 'mwei'), '0.000001');
       assert.equal(Units.convertETH('1', 'wei', 'kwei'), '0.001');
     });
-    it('should convert kwei to bigger unit', function() {
+    it('should convert kwei to bigger unit', function () {
       assert.equal(Units.convertETH('1', 'kwei', 'eth'), '0.000000000000001');
       assert.equal(Units.convertETH('1', 'kwei', 'finney'), '0.000000000001');
       assert.equal(Units.convertETH('1', 'kwei', 'gwei'), '0.000001');
@@ -172,7 +172,7 @@ describe('Units', () => {
       assert.equal(Units.convertXRP('1.5', 'xrp', 'drop'), '1500000');
       assert.equal(Units.convertXRP('1.05', 'xrp', 'drop'), '1050000');
     });
-    it('should convert drop to bigger units', function() {
+    it('should convert drop to bigger units', function () {
       assert.equal(Units.convertXRP('1', 'drop', 'xrp'), '0.000001');
     });
     it('should fail on invalid input drop', () => {
@@ -210,7 +210,7 @@ describe('Units', () => {
       assert.equal(Units.convertLTC('1.5', 'photon', 'litoshi'), '150');
       assert.equal(Units.convertLTC('1.05', 'photon', 'litoshi'), '105');
     });
-    it('should convert litoshi to bigger unit', function() {
+    it('should convert litoshi to bigger unit', function () {
       assert.equal(Units.convertLTC('1', 'litoshi', 'ltc'), '0.00000001');
     });
     it('should fail on invalid input litoshi', () => {
@@ -243,9 +243,9 @@ describe('Units', () => {
   describe('convertDASH', () => {
     it('should convert Dash big unit to small unit', () => {
       assert.equal(Units.convertDASH('1', 'dash', 'duff'), '100000000');
-   
+
     });
-    it('should convert duff to bigger unit', function() {
+    it('should convert duff to bigger unit', function () {
       assert.equal(Units.convertDASH('1', 'duff', 'dash'), '0.00000001');
     });
     it('should fail on invalid input duff', () => {
@@ -278,9 +278,9 @@ describe('Units', () => {
   describe('convertZEC', () => {
     it('should convert Zcash big unit to small unit', () => {
       assert.equal(Units.convertZEC('1', 'zec', 'zatoshi'), '100000000');
-   
+
     });
-    it('should convert duff to bigger unit', function() {
+    it('should convert duff to bigger unit', function () {
       assert.equal(Units.convertZEC('1', 'zatoshi', 'zec'), '0.00000001');
     });
     it('should fail on invalid input zatoshi', () => {
@@ -307,6 +307,111 @@ describe('Units', () => {
     });
     it('should work with any capitalization', () => {
       assert.equal(Units.convertZEC('1', 'ZeC', 'ZAtoShI'), '100000000');
+    });
+  });
+
+  describe('convertBRL', () => {
+    it('should convert Real big unit to small unit', () => {
+      assert.equal(Units.convertBRL('1', 'real', 'centavo'), '100');
+
+    });
+    it('should convert duff to bigger unit', function () {
+      assert.equal(Units.convertBRL('1', 'centavo', 'real'), '0.01');
+    });
+    it('should fail on invalid input centavo', () => {
+      assert.throws(() => {
+        Units.convertBRL('1', 'random', 'centavo');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on invalid output brl', () => {
+      assert.throws(() => {
+        Units.convertBRL('1', 'real', 'random');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on non-decimal input', function () {
+      assert.throws(function () {
+        Units.convertBRL('1,00', 'real', 'random');
+      }, /^Error: Unsupported value$/);
+
+      assert.throws(function () {
+        Units.convertBRL('test', 'real', 'random');
+      }, /^Error: Unsupported value$/);
+    });
+    it('should work with decimal first numbers', () => {
+      assert.equal(Units.convertBRL('.1', 'real', 'centavo'), '100');
+    });
+    it('should work with any capitalization', () => {
+      assert.equal(Units.convertBRL('1', 'reaL', 'CentaVo'), '100');
+    });
+  });
+
+  describe('convertUSD', () => {
+    it('should convert Dolar big unit to small unit', () => {
+      assert.equal(Units.convertUSD('1', 'dollar', 'cent'), '100');
+
+    });
+    it('should convert duff to bigger unit', function () {
+      assert.equal(Units.convertUSD('1', 'cent', 'dollar'), '0.01');
+    });
+    it('should fail on invalid input cent', () => {
+      assert.throws(() => {
+        Units.convertUSD('1', 'random', 'cent');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on invalid output usd', () => {
+      assert.throws(() => {
+        Units.convertUSD('1', 'dollar', 'random');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on non-decimal input', function () {
+      assert.throws(function () {
+        Units.convertUSD('1,00', 'dollar', 'random');
+      }, /^Error: Unsupported value$/);
+
+      assert.throws(function () {
+        Units.convertUSD('test', 'dollar', 'random');
+      }, /^Error: Unsupported value$/);
+    });
+    it('should work with decimal first numbers', () => {
+      assert.equal(Units.convertUSD('.1', 'dollar', 'centavo'), '100');
+    });
+    it('should work with any capitalization', () => {
+      assert.equal(Units.convertUSD('1', 'DollaR', 'Cent'), '100');
+    });
+  });
+
+  describe('convertEUR', () => {
+    it('should convert Euro big unit to small unit', () => {
+      assert.equal(Units.convertEUR('1', 'euro', 'cent'), '100');
+
+    });
+    it('should convert duff to bigger unit', function () {
+      assert.equal(Units.convertEUR('1', 'cent', 'euro'), '0.01');
+    });
+    it('should fail on invalid input cent', () => {
+      assert.throws(() => {
+        Units.convertEUR('1', 'random', 'cent');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on invalid output usd', () => {
+      assert.throws(() => {
+        Units.convertEUR('1', 'euro', 'random');
+      }, /^Error: Unsupported input unit$/);
+    });
+    it('should fail on non-decimal input', function () {
+      assert.throws(function () {
+        Units.convertEUR('1,00', 'euro', 'random');
+      }, /^Error: Unsupported value$/);
+
+      assert.throws(function () {
+        Units.convertEUR('test', 'euro', 'random');
+      }, /^Error: Unsupported value$/);
+    });
+    it('should work with decimal first numbers', () => {
+      assert.equal(Units.convertEUR('.1', 'euro', 'centavo'), '100');
+    });
+    it('should work with any capitalization', () => {
+      assert.equal(Units.convertEUR('1', 'EurO', 'Cent'), '100');
     });
   });
 });

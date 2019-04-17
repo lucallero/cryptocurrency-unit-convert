@@ -12,6 +12,9 @@ const xrpUnits = {};
 const ltcUnits = {};
 const dashUnits = {};
 const zecUnits = {};
+const brlUnits = {};
+const usdUnits = {};
+const eurUnits = {};
 
 Object.keys(rawUnits).map(function (rawUnit) {
   Object.keys(rawUnits[rawUnit]).map(function(i) {
@@ -159,6 +162,52 @@ Units.convertZEC = (value, from, to) => {
     throw new Error('Unsupported input unit');
   }
   return new BigNumber(value, 10).times(zecUnits[from]).div(zecUnits[to]).toString(10);
+};
+
+Units.convertBRL = (value, from, to) => {
+  from = from.toLowerCase();
+  to = to.toLowerCase();
+  if (!regX.test(value)) {
+    throw new Error('Unsupported value');
+  }
+  if (!brlUnits[from]) {
+    throw new Error('Unsupported input unit');
+  }
+  if (!brlUnits[to]) {
+    throw new Error('Unsupported input unit');
+  }
+  return new BigNumber(value, 10).times(brlUnits[from]).div(brlUnits[to]).toString(10);
+};
+
+Units.convertUSD = (value, from, to) => {
+  from = from.toLowerCase();
+  to = to.toLowerCase();
+  if (!regX.test(value)) {
+    throw new Error('Unsupported value');
+  }
+  if (!usdUnits[from]) {
+    throw new Error('Unsupported input unit');
+  }
+  if (!usdUnits[to]) {
+    throw new Error('Unsupported input unit');
+  }
+  return new BigNumber(value, 10).times(usdUnits[from]).div(usdUnits[to]).toString(10);
+};
+
+
+Units.convertEUR = (value, from, to) => {
+  from = from.toLowerCase();
+  to = to.toLowerCase();
+  if (!regX.test(value)) {
+    throw new Error('Unsupported value');
+  }
+  if (!eurUnits[from]) {
+    throw new Error('Unsupported input unit');
+  }
+  if (!eurUnits[to]) {
+    throw new Error('Unsupported input unit');
+  }
+  return new BigNumber(value, 10).times(eurUnits[from]).div(eurUnits[to]).toString(10);
 };
 
 module.exports = Units;
