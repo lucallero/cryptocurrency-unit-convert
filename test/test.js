@@ -313,9 +313,8 @@ describe('Units', () => {
   describe('convertBRL', () => {
     it('should convert Real big unit to small unit', () => {
       assert.equal(Units.convertBRL('1', 'real', 'centavo'), '100');
-
     });
-    it('should convert duff to bigger unit', function () {
+    it('should convert centavo to bigger unit', function () {
       assert.equal(Units.convertBRL('1', 'centavo', 'real'), '0.01');
     });
     it('should fail on invalid input centavo', () => {
@@ -338,7 +337,7 @@ describe('Units', () => {
       }, /^Error: Unsupported value$/);
     });
     it('should work with decimal first numbers', () => {
-      assert.equal(Units.convertBRL('.1', 'real', 'centavo'), '100');
+      assert.equal(Units.convertBRL('.1', 'real', 'centavo'), '10');
     });
     it('should work with any capitalization', () => {
       assert.equal(Units.convertBRL('1', 'reaL', 'CentaVo'), '100');
@@ -373,7 +372,7 @@ describe('Units', () => {
       }, /^Error: Unsupported value$/);
     });
     it('should work with decimal first numbers', () => {
-      assert.equal(Units.convertUSD('.1', 'dollar', 'centavo'), '100');
+      assert.equal(Units.convertUSD('.1', 'dollar', 'cent'), '10');
     });
     it('should work with any capitalization', () => {
       assert.equal(Units.convertUSD('1', 'DollaR', 'Cent'), '100');
@@ -408,7 +407,7 @@ describe('Units', () => {
       }, /^Error: Unsupported value$/);
     });
     it('should work with decimal first numbers', () => {
-      assert.equal(Units.convertEUR('.1', 'euro', 'centavo'), '100');
+      assert.equal(Units.convertEUR('.1', 'euro', 'cent'), '10');
     });
     it('should work with any capitalization', () => {
       assert.equal(Units.convertEUR('1', 'EurO', 'Cent'), '100');

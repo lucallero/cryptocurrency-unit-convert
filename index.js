@@ -53,6 +53,20 @@ Object.keys(rawUnits).map(function (rawUnit) {
       zecUnits[i] = new BigNumber(rawUnits[rawUnit][i], 10);
       Units.zecUnits = rawUnits[rawUnit];
     }
+    if (rawUnit === 'brl') {
+      brlUnits[i] = new BigNumber(rawUnits[rawUnit][i], 10);
+      Units.brlUnits = rawUnits[rawUnit];
+    }
+
+    if (rawUnit === 'usd') {
+      usdUnits[i] = new BigNumber(rawUnits[rawUnit][i], 10);
+      Units.usdUnits = rawUnits[rawUnit];
+    }
+
+    if (rawUnit === 'eur') {
+      eurUnits[i] = new BigNumber(rawUnits[rawUnit][i], 10);
+      Units.eurUnits = rawUnits[rawUnit];
+    }
 
   });
 });

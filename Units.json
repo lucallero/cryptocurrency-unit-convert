@@ -49,17 +49,17 @@
 
   "brl": {
     "centavo"   :    "0.01",
-    "real"       :    "1"
+    "real"      :    "1"
   },
 
   "usd": {
-    "cent"   :    "0.01",
-    "dollar"       :    "1"
+    "cent"      :    "0.01",
+    "dollar"    :    "1"
   },
 
   "eur": {
-    "cent"   :    "0.01",
-    "euro"       :    "1"
+    "cent"      :    "0.01",
+    "euro"      :    "1"
   }
 
 }
